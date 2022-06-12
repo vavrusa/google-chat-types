@@ -54,6 +54,7 @@ use std::fmt::Display;
 
 use derive_builder::{Builder, UninitializedFieldError};
 use serde::Serialize;
+use thiserror::Error;
 
 #[doc = "The Text message type"]
 #[derive(Serialize, Clone, Builder)]
@@ -168,6 +169,17 @@ pub struct KeyValue {
     button: Option<Button>,
 }
 
+impl KeyValue {
+    pub fn to_widget(&self) -> Widget {
+        Widget {
+            text_paragraph: None,
+            image: None,
+            buttons: None,
+            key_value: Some(self.to_owned()),
+        }
+    }
+}
+
 #[derive(Serialize, Clone, Default, Builder)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
@@ -178,6 +190,17 @@ pub struct Image {
     #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     on_click: Option<OnClick>,
+}
+
+impl Image {
+    pub fn to_widget(&self) -> Widget {
+        Widget {
+            text_paragraph: None,
+            key_value: None,
+            image: Some(self.to_owned()),
+            buttons: None,
+        }
+    }
 }
 
 #[derive(Serialize, Clone, Default, Builder)]
@@ -231,7 +254,7 @@ pub struct OpenLink {
     url: String,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Error)]
 pub struct ChatTypeBuildError(String);
 
 impl Display for ChatTypeBuildError {

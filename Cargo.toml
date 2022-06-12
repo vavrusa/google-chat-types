@@ -2,7 +2,8 @@
 name = "google-chat-types"
 version = "0.1.0"
 edition = "2021"
-authors = ["sinyo-matu"]
+authors = ["sinyo-matu <sinyo_matu@icloud.com>"]
+license = "MIT"
 description = "types collection of google chat response"
 categories = ["api-bindings","development-tools"]
 keywords = ["googlechat","google","chat"]

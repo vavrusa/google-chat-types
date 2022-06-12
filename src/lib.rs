@@ -55,7 +55,7 @@ use std::fmt::Display;
 use derive_builder::{Builder, UninitializedFieldError};
 use serde::Serialize;
 
-/// the simple text response
+#[doc = "The Text message type"]
 #[derive(Serialize, Clone, Builder)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
@@ -64,7 +64,7 @@ pub struct Text {
     text: String,
 }
 
-/// multi-Card response
+#[doc = "The Card message type"]
 #[derive(Serialize, Clone, Builder)]
 #[serde(rename_all = "camelCase")]
 pub struct Cards {

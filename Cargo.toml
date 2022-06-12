@@ -5,7 +5,7 @@ edition = "2021"
 authors = ["sinyo-matu"]
 description = "types collection of google chat response"
 categories = ["api-bindings","development-tools"]
-keywords = ["google chat"]
+keywords = ["googlechat","google","chat"]
 repository = "https://github.com/sinyo-matu/google-chat-types"
 readme = "README.md"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

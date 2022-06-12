@@ -50,6 +50,8 @@
 //!
 //! <img src="https://future-architect.github.io/images/20210913a/screenshot_card_message.png" width="900px"></img>
 //!
+use std::fmt::Display;
+
 use derive_builder::{Builder, UninitializedFieldError};
 use serde::Serialize;
 
@@ -231,6 +233,12 @@ pub struct OpenLink {
 
 #[derive(Debug)]
 pub struct ChatTypeBuildError(String);
+
+impl Display for ChatTypeBuildError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_fmt(format_args!("Error in build process {}", self.0))
+    }
+}
 
 impl From<UninitializedFieldError> for ChatTypeBuildError {
     fn from(e: UninitializedFieldError) -> Self {

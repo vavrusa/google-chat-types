@@ -58,7 +58,7 @@ use serde::Serialize;
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Text {
-    #[builder(private, setter(into))]
+    #[builder(setter(into))]
     text: String,
 }
 
@@ -75,10 +75,10 @@ pub struct Cards {
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Card {
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     header: Option<Header>,
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     sections: Option<Vec<Section>>,
 }
@@ -87,16 +87,16 @@ pub struct Card {
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Header {
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     title: Option<String>,
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     subtitle: Option<String>,
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     image_url: Option<String>,
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     image_style: Option<String>,
 }
@@ -105,10 +105,10 @@ pub struct Header {
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Section {
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     header: Option<String>,
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     widgets: Option<Vec<Widget>>,
 }
@@ -117,23 +117,23 @@ pub struct Section {
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Widget {
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     text_paragraph: Option<TextParagraph>,
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     key_value: Option<KeyValue>,
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     image: Option<Image>,
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     buttons: Option<Vec<Button>>,
 }
 
 #[derive(Serialize, Clone, Builder)]
 #[serde(rename_all = "camelCase")]
-#[builder(private, build_fn(error = "ChatTypeBuildError"))]
+#[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct TextParagraph {
     #[builder(setter(into))]
     text: String,
@@ -143,25 +143,25 @@ pub struct TextParagraph {
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct KeyValue {
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     top_label: Option<String>,
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     icon: Option<String>,
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     content_multiline: Option<String>,
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     bottom_label: Option<String>,
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     on_click: Option<OnClick>,
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     button: Option<Button>,
 }
@@ -170,10 +170,10 @@ pub struct KeyValue {
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Image {
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     image_url: Option<String>,
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     on_click: Option<OnClick>,
 }
@@ -182,10 +182,10 @@ pub struct Image {
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Button {
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     text_button: Option<TextButton>,
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     image_button: Option<ImageButton>,
 }
@@ -202,13 +202,13 @@ pub struct TextButton {
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct ImageButton {
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     icon_url: Option<String>,
-    #[builder(private, setter(into, strip_option), default)]
+    #[builder(setter(into, strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     icon: Option<String>,
-    #[builder(private, setter(strip_option), default)]
+    #[builder(setter(strip_option), default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     on_click: Option<OnClick>,
 }

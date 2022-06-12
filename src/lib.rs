@@ -68,6 +68,7 @@ pub struct Text {
 #[doc = "The Card message type"]
 #[derive(Serialize, Clone, Builder)]
 #[serde(rename_all = "camelCase")]
+#[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Cards {
     cards: Vec<Card>,
 }

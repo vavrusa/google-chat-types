@@ -1,5 +1,7 @@
 //! Google Chat Types
 //!
+//! ## About Google Chat Message
+//!
 //! type helper for construct Google Chat [message](https://developers.google.com/chat/api/guides/message-formats/basic)
 //! There two type of Google Chat message
 //! - Text Message
@@ -46,10 +48,15 @@
 //!}
 //! ```
 //!
-//! the relationship between element of cards should likes look
+//! the relationship between elements of cards should looks like below
 //!
 //! <img src="https://future-architect.github.io/images/20210913a/screenshot_card_message.png" width="900px"></img>
 //!
+//! ## How to use this crate
+//!
+//! you should construct Cards or Text struct,
+//! then serialize them to json string as a Google Chat API(for instance [incoming webhook](https://developers.google.com/chat/how-tos/webhooks)) http request body.
+
 use std::fmt::Display;
 
 use derive_builder::{Builder, UninitializedFieldError};

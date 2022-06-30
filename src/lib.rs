@@ -64,7 +64,7 @@ use serde::Serialize;
 use thiserror::Error;
 
 #[doc = "The Text message type"]
-#[derive(Serialize, Clone, Builder)]
+#[derive(Serialize, Clone, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Text {
@@ -73,7 +73,7 @@ pub struct Text {
 }
 
 #[doc = "The Card message type"]
-#[derive(Serialize, Clone, Builder)]
+#[derive(Serialize, Clone, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Cards {
@@ -82,7 +82,7 @@ pub struct Cards {
 
 /// the Card response.
 /// construct this by call default() method of this type
-#[derive(Serialize, Clone, Default, Builder)]
+#[derive(Serialize, Clone, Default, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Card {
@@ -94,7 +94,7 @@ pub struct Card {
     sections: Option<Vec<Section>>,
 }
 
-#[derive(Serialize, Clone, Default, Builder)]
+#[derive(Serialize, Clone, Default, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Header {
@@ -112,7 +112,7 @@ pub struct Header {
     image_style: Option<String>,
 }
 
-#[derive(Serialize, Clone, Default, Builder)]
+#[derive(Serialize, Clone, Default, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Section {
@@ -124,7 +124,7 @@ pub struct Section {
     widgets: Option<Vec<Widget>>,
 }
 
-#[derive(Serialize, Clone, Default, Builder)]
+#[derive(Serialize, Clone, Default, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Widget {
@@ -142,7 +142,7 @@ pub struct Widget {
     buttons: Option<Vec<Button>>,
 }
 
-#[derive(Serialize, Clone, Builder)]
+#[derive(Serialize, Clone, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct TextParagraph {
@@ -150,7 +150,7 @@ pub struct TextParagraph {
     text: String,
 }
 
-#[derive(Serialize, Clone, Default, Builder)]
+#[derive(Serialize, Clone, Default, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct KeyValue {
@@ -188,7 +188,7 @@ impl KeyValue {
     }
 }
 
-#[derive(Serialize, Clone, Default, Builder)]
+#[derive(Serialize, Clone, Default, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Image {
@@ -211,7 +211,7 @@ impl Image {
     }
 }
 
-#[derive(Serialize, Clone, Default, Builder)]
+#[derive(Serialize, Clone, Default, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct Button {
@@ -223,15 +223,19 @@ pub struct Button {
     image_button: Option<ImageButton>,
 }
 
-#[derive(Serialize, Clone, Builder)]
+#[derive(Serialize, Clone, Default, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct TextButton {
-    text: String,
-    on_click: OnClick,
+    #[builder(setter(strip_option), default)]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    text: Option<String>,
+    #[builder(setter(strip_option), default)]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    on_click: Option<OnClick>,
 }
 
-#[derive(Serialize, Clone, Default, Builder)]
+#[derive(Serialize, Clone, Default, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct ImageButton {
@@ -246,19 +250,19 @@ pub struct ImageButton {
     on_click: Option<OnClick>,
 }
 
-#[derive(Serialize, Clone, Builder)]
+#[derive(Serialize, Clone, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct OnClick {
-    #[builder(private)]
+    #[builder(setter(into))]
     open_link: OpenLink,
 }
 
-#[derive(Serialize, Clone, Builder)]
+#[derive(Serialize, Clone, Builder, Debug)]
 #[serde(rename_all = "camelCase")]
 #[builder(build_fn(error = "ChatTypeBuildError"))]
 pub struct OpenLink {
-    #[builder(private)]
+    #[builder(setter(into))]
     url: String,
 }
 
